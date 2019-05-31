@@ -39,16 +39,59 @@ router.put('/:id', validateProjectId, (req, res) => {
 router.delete('/:id', validateProjectId, (req, res) => {
     const deletedProject = Projects.remove(req.params.id)
     .then(response => {
-        res.status(200).send("User deleted.")
+        res.status(200).send("Project deleted.")
     })
     .catch(error => {
         res.status(500).send("An error occurred.")
     })
 })
 
+//actions
+router.post('/:id/actions', validateProjectId, (req, res) => {
+    const action = Actions.insert(req.body)
+    .then(response => {
+        res.status(200).send(response)
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).send(error)
+    })
+})
+
+router.get('/:id/actions', validateProjectId, (req, res) => {
+    const actions = Projects.getProjectActions(req.params.id)
+    .then(response => {
+        res.status(200).send(response)
+    })
+    .catch(error => {
+        res.status(500).send("An error occurred.")
+    })
+})
+
+router.put('/:id/actions/:actionid', validateProjectId, (req, res) => {
+    const updatedAction = Actions.update(req.params.actionid, req.body)
+    .then(response => {
+        res.status(200).send(response)
+    })
+    .catch(error => {
+        res.status(500).send(error)
+    })
+})
+
+router.delete('/:id/actions/:actionid', validateProjectId, (req, res) => {
+    const deletedAction = Actions.remove(req.params.actionid)
+    .then(response => {
+        res.status(200).send(response)
+    })
+    .catch(error => {
+        res.status(500).send(error)
+    })
+})
+
+
 //middleware
 function validateProjectId (req, res, next) {
-    Projects.get(req.params.id)
+    Projects.get(req.body.project_id || req.params.id)
     .then(project => {
         if (project) {
             next()
