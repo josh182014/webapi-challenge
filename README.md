@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+I learned that you can split express projects into smaller parts using "router" and how easy it is to add middleware to.
+
 - [ ] Describe Middleware?
+
+Middleware are functions that are invoked before your final request handler. 
 
 - [ ] Describe a Resource?
 
+A resource can be anything. It could be a list of users, data about the weather, or pretty much any other kind of data. They are each accessible with their own URL. You can use that URL to perform any of the CRUD operations on them. 
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+The API can return error codes and messages indicating whether the request was successful or not. 
+
 - [ ] How can we partition our application into sub-applications?
+
+We can use the "router" to put different url routes into different parts of our application. 
 
 ## Project Setup
 
