@@ -58,6 +58,7 @@ router.post('/:id/actions', validateProjectId, (req, res) => {
     })
 })
 
+//get all project's actions based on project id
 router.get('/:id/actions', validateProjectId, (req, res) => {
     const actions = Projects.getProjectActions(req.params.id)
     .then(response => {
@@ -67,6 +68,18 @@ router.get('/:id/actions', validateProjectId, (req, res) => {
         res.status(500).send("An error occurred.")
     })
 })
+
+//get single action based on action's id
+router.get('/:id/actions/:actionid', validateProjectId, (req, res) => {
+    const actions = Actions.get(req.params.actionid)
+    .then(response => {
+        res.status(200).send(response)
+    })
+    .catch(error => {
+        res.status(500).send("An error occurred.")
+    })
+})
+
 
 router.put('/:id/actions/:actionid', validateProjectId, (req, res) => {
     const updatedAction = Actions.update(req.params.actionid, req.body)
